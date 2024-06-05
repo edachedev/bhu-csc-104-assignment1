@@ -49,6 +49,21 @@ class CurrentAccount(Account):
           super().withdraw(amount)
           return super().get_balanced()
 
+class ChildrensAccount(Account):
+    def _init_(self, account_number, account_holder, balance=0):
+        super()._init_(account_number, account_holder, balance)
+        self.__interest_rate = 0.007
+
+    def deposit(self, amount):
+        super().deposit(amount)
+        interest = amount * self.__interest_rate
+        super().deposit(interest)
+        return super().get_balance()
+
+    def withdraw(self, amount):
+        print("Withdrawal not allowed for Children's Account")
+
+
 
 
 savings_account = SavingsAccount("SAV123", "John Doe", 10000)
@@ -65,3 +80,9 @@ print(current_account)
 current_account.withdraw(15000)
 print(current_account)
 
+
+childrens_account = ChildrensAccount("CHD789", "Baby Doe", 5000)
+print(childrens_account)
+childrens_account.deposit(2000)
+print(childrens_account)
+childrens_account.withdraw(1000)
