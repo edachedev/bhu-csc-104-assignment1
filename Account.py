@@ -66,6 +66,37 @@ class ChildrensAccount(Account):
 
 
 
+
+class StudentAccount(Account):
+    def _init_(self, account_number, account_holder, balance=0):
+        super()._init_(account_number, account_holder, balance)
+        self.__withdrawal_limit = 2000
+        self.__deposit_limit = 50000
+
+    def deposit(self, amount):
+        if amount <= self.__deposit_limit:
+            super().deposit(amount)
+            return super().get_balance()
+        else:
+            print("Deposit amount exceeds limit")
+
+    def withdraw(self, amount):
+        if amount <= self.__withdrawal_limit:
+            super().withdraw(amount)
+            return super().get_balance()
+        else:
+            print("Withdrawal amount exceeds limit")
+
+        student_account = StudentAccount("STU901", "Student Doe", 10000)
+        print(student_account)
+        student_account.deposit(30000)
+        print(student_account)
+        student_account.withdraw(1500)
+        print(student_account)
+
+
+
+
 savings_account = SavingsAccount("SAV123", "John Doe", 10000)
 print(savings_account)
 savings_account.deposit(5000)
