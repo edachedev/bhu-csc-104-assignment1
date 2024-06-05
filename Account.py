@@ -40,9 +40,28 @@ class SavingsAccount(Account):
         else:
             print("Withdrawal amount exceeds limit")
 
+
+class CurrentAccount(Account):
+     def __init__(self, account_number, account_holder, balance=0):
+          super().__init__(account_number, account_holder, balance)
+
+     def withdraw(self, amount):
+          super().withdraw(amount)
+          return super().get_balanced()
+
+
+
 savings_account = SavingsAccount("SAV123", "John Doe", 10000)
 print(savings_account)
 savings_account.deposit(5000)
 print(savings_account)
 savings_account.withdraw(30000)
 print(savings_account)
+
+current_account = CurrentAccount("CUR456", "Jane Doe", 20000)
+print(current_account)
+current_account.deposit(10000)
+print(current_account)
+current_account.withdraw(15000)
+print(current_account)
+
