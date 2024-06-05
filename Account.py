@@ -18,7 +18,7 @@ class Account:
         return self.__balance
 
     def withdraw(self, amount):
-        raise NotImplementedError("Withdrawal method must be implemented by subclass")
+        print("Withdrawal method must be implemented by subclass")
 
     def __str__(self):
         return f"Account Number: {self.__account_number}, Account Holder: {self.__account_holder}, Balance: {self.__balance}"
