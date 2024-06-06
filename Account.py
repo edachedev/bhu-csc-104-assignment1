@@ -18,7 +18,31 @@ class Account:
         return self.__balance
 
     def withdraw(self, amount):
-        raise NotImplementedError("Withdrawal method must be implemented by subclass")
+        print("Withdrawal method must be implemented by subclass")
 
     def __str__(self):
         return f"Account Number: {self.__account_number}, Account Holder: {self.__account_holder}, Balance: {self.__balance}"
+class SavingsAccount(Account):
+    def __init__(self, account_number, account_holder, balance=0):
+        super().__init__(account_number, account_holder, balance)
+        self.__interest_rate = 0.005
+
+    def deposit(self, amount):
+        super().deposit(amount)
+        interest = amount * self.__interest_rate
+        super().deposit(interest)
+        return super().get_balance()
+
+    def withdraw(self, amount):
+        if amount <= 700000:
+            super().withdraw(amount)
+            return super().get_balance()
+        else:
+            print("Withdrawal amount exceeds limit")
+
+savings_account = SavingsAccount("SAV123", "John Doe", 10000)
+print(savings_account)
+savings_account.deposit(5000)
+print(savings_account)
+savings_account.withdraw(30000)
+print(savings_account)
